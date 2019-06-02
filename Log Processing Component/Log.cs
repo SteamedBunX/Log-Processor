@@ -16,5 +16,10 @@ namespace Log_Processing_Component
         {
             return LogDateTime.CompareTo(other.LogDateTime);
         }
+
+        public override string ToString()
+        {
+            return $"{LogNumber : 000000000}, {LogDateTime}";
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Log_Processing_Component
         TimeSpan totalWorkTime = new TimeSpan(0);
         List<Log> allLogs = new List<Log>();
         List<Log> pairedLogs = new List<Log>();
-        List<Log> oddDays = new List<Log>();
+        List<Log> oddLogs = new List<Log>();
 
         public Employee(string name)
         {
@@ -29,7 +29,7 @@ namespace Log_Processing_Component
                 //if it reaches the last index, which means nothing is there to pair with it
                 if (i == allLogs.Count - 1)
                 {
-                    oddDays.Add(allLogs[i]);
+                    oddLogs.Add(allLogs[i]);
                 }
                 // if the two are the same day
                 else if (allLogs[i].LogDateTime.Date == allLogs[i + 1].LogDateTime.Date)
@@ -41,7 +41,7 @@ namespace Log_Processing_Component
                 // if the two are not the same day
                 else
                 {
-                    oddDays.Add(allLogs[i]);
+                    oddLogs.Add(allLogs[i]);
                     i--;
                 }
             }
@@ -88,9 +88,9 @@ namespace Log_Processing_Component
             return pairedLogs;
         }
 
-        public List<Log> GetOddDaysLog()
+        public List<Log> GetOddLogs()
         {
-            return oddDays;
+            return oddLogs;
         }
 
         #endregion
@@ -99,8 +99,23 @@ namespace Log_Processing_Component
 
         public string GetLogString()
         {
-            string result = "";
+            string result = $"\tEmployee : {name}\n\t\tAll Paired Logs :\n";
+            foreach(Log log in pairedLogs)
+            {
+                result += $"\t\t\t{log}\n";
+            }
+            result += "\t\tAll Odd Logs :\n";
+            foreach(Log log in oddLogs)
+            {
+                result += $"\t\t\t{log}\n";
+            }
+            result += "\n\n";
             return result;
+        }
+
+        public string GetTimeResultString()
+        {
+            return $"\tEmployee {name} worked {totalWorkTime.TotalHours}\n";
         }
 
         #endregion

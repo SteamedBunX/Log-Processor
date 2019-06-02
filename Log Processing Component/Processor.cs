@@ -13,7 +13,8 @@ namespace Log_Processing_Component
         Dictionary<string, Employee> employees = new Dictionary<string, Employee>();
         List<string> employeeNames = new List<string>();
         string[] splitBy = new string[] { " ", "\t" };
-        string testString;
+        string workHourResultString;
+        string logResultString;
         StorageFile file;
 
         public Processor(StorageFile file)
@@ -35,15 +36,12 @@ namespace Log_Processing_Component
                 foreach (KeyValuePair<string, Employee> pair in employees)
                 {
                     pair.Value.Process();
-                    
+                    workHourResultString += pair.Value.GetTimeResultString();
+                    logResultString += pair.Value.GetLogString();
                 }
             }
         }
 
-        public string GetTestLog()
-        {
-            return testString;
-        }
 
         public Log ProcessLine(string line)
         {
@@ -103,6 +101,16 @@ namespace Log_Processing_Component
         public bool HasEmployee(string name)
         {
             return employeeNames.Contains(name);
+        }
+
+        public string GetTimeResultString()
+        {
+            return workHourResultString;
+        }
+
+        public string GetLogResultString()
+        {
+            return logResultString;
         }
 
         #endregion
