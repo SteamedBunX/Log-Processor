@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Log_Processing_Component
 {
@@ -12,23 +13,36 @@ namespace Log_Processing_Component
         Dictionary<string, Employee> employees = new Dictionary<string, Employee>();
         List<string> employeeNames = new List<string>();
         string[] splitBy = new string[] { " ", "\t" };
+        string testString;
+        StorageFile file;
 
-        public Processor(ref StreamReader file)
+        public Processor(StorageFile file)
         {
-            Process(ref file);
+            this.file = file;
         }
 
-        public void Process(ref StreamReader file)
+        public async Task Process()
         {
-            while (file.Peek() > -1)
+            // read file wiht code copied from MSDN
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+            using (StreamReader reader = new StreamReader(stream.AsStream()))
             {
-                ProcessLog(ProcessLine(file.ReadLine()));
+                while (reader.Peek() > -1)
+                {
+                    ProcessLog(ProcessLine(reader.ReadLine()));
+                }
+                List<Log> testLogs = new List<Log>();
+                foreach (KeyValuePair<string, Employee> pair in employees)
+                {
+                    pair.Value.Process();
+                    
+                }
             }
+        }
 
-            foreach (KeyValuePair<string, Employee> pair in employees)
-            {
-                pair.Value.Process();
-            }
+        public string GetTestLog()
+        {
+            return testString;
         }
 
         public Log ProcessLine(string line)
@@ -59,6 +73,7 @@ namespace Log_Processing_Component
                 {
                     AddEmployee(log.Name);
                 }
+                AddLog(log);
             }
 
         }
@@ -89,6 +104,7 @@ namespace Log_Processing_Component
         {
             return employeeNames.Contains(name);
         }
+
         #endregion
     }
 }

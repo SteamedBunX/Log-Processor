@@ -11,13 +11,43 @@ namespace Log_Processing_Component
         string name;
         TimeSpan totalWorkTime = new TimeSpan(0);
         List<Log> allLogs = new List<Log>();
+        List<Log> pairedLogs = new List<Log>();
         List<Log> oddDays = new List<Log>();
 
         public Employee(string name)
         {
             this.name = name;
         }
-        #region Manipulation
+
+        public void Process()
+        {
+            //the data should already be sorted, but better double check just in case;
+            SortLog();
+            // process the log by pair, and catch if there are odd datas.
+            for (int i = 0; i < allLogs.Count; i += 2)
+            {
+                //if it reaches the last index, which means nothing is there to pair with it
+                if (i == allLogs.Count - 1)
+                {
+                    oddDays.Add(allLogs[i]);
+                }
+                // if the two are the same day
+                else if (allLogs[i].LogDateTime.Date == allLogs[i + 1].LogDateTime.Date)
+                {
+                    AddToWorkHour(allLogs[i + 1].LogDateTime - allLogs[i].LogDateTime);
+                    pairedLogs.Add(allLogs[i]);
+                    pairedLogs.Add(allLogs[i + 1]);
+                }
+                // if the two are not the same day
+                else
+                {
+                    oddDays.Add(allLogs[i]);
+                    i--;
+                }
+            }
+        }
+
+        #region Basic Manipulation
 
         public void AddToWorkHour(TimeSpan time)
         {
@@ -27,11 +57,6 @@ namespace Log_Processing_Component
         public void AddLog(Log log)
         {
             allLogs.Add(log);
-        }
-
-        public void Process()
-        {
-            
         }
 
         public void SortLog()
@@ -58,9 +83,24 @@ namespace Log_Processing_Component
             return allLogs;
         }
 
+        public List<Log> GetPairedLogds()
+        {
+            return pairedLogs;
+        }
+
         public List<Log> GetOddDaysLog()
         {
             return oddDays;
+        }
+
+        #endregion
+
+        #region Get Results
+
+        public string GetLogString()
+        {
+            string result = "";
+            return result;
         }
 
         #endregion

@@ -45,11 +45,14 @@ namespace Log_Processor
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file != null)
             {
-                var stream = await file.OpenAsync(FileAccessMode.Read);
-                StreamReader reader = new StreamReader(stream.AsStream());
-                p = new Processor(ref reader);
-                reader.Dispose();
+                p = new Processor(file);
+                await p.Process();
             }
+        }
+
+        private void Button_Print_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox_PostProcessLog.Text = p.GetTestLog();
         }
     }
 }
