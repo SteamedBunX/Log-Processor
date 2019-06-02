@@ -9,12 +9,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="800" Height="500">
 
     <Grid >
-        <TextBox x:Name="TextBox_PostProcessLog" HorizontalAlignment="Left" Text="" VerticalAlignment="Center" Height="500" Width="500" IsReadOnly="True" AcceptsReturn="True"/>
+        <TextBox x:Name="TextBox_PostProcessLog" HorizontalAlignment="Left" Text="" VerticalAlignment="Center" Height="500" Width="500" IsReadOnly="True" AcceptsReturn="True"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.ZoomMode="Disabled"/>
         <Grid Margin="500,0,0,0">
             <Button x:Name="Button_LoadFile" Content="Load File..."  Margin="0,50,0,0" VerticalAlignment="Top" Width="166" Height="40" Click="Button_Click" HorizontalAlignment="Center"/>
-            <Button x:Name="Button_Print" Content="Print Without Log" Margin="0,125,0,0" VerticalAlignment="Top" Width="166" Height="40" HorizontalAlignment="Center" Click="Button_Print_Click"/>
-            <Button x:Name="Button_Print_Copy" Content="Print With Odd Logs" Margin="0,200,0,0" VerticalAlignment="Top" Width="166" Height="40" HorizontalAlignment="Center" Click="Button_Print_Click"/>
-            <Button x:Name="Button_Print_Copy1" Content="Print With All Logs" Margin="0,275,0,0" VerticalAlignment="Top" Width="166" Height="40" HorizontalAlignment="Center" Click="Button_Print_Click"/>
+            <Button x:Name="Button_Print_NoLog" Content="Print Without Log" Margin="0,125,0,0" VerticalAlignment="Top" Width="166" Height="40" HorizontalAlignment="Center" Click="Button_Print_NoLog_Click"/>
+            <Button x:Name="Button_Print_WithOddLog" Content="Print With Odd Logs" Margin="0,200,0,0" VerticalAlignment="Top" Width="166" Height="40" HorizontalAlignment="Center" Click="Button_Print_WithOddLog_Click"/>
+            <Button x:Name="Button_Print_WithAllLog" Content="Print With All Logs" Margin="0,275,0,0" VerticalAlignment="Top" Width="166" Height="40" HorizontalAlignment="Center" Click="Button_Print_WithAllLog_Click"/>
         </Grid>
     </Grid>
 </Page>

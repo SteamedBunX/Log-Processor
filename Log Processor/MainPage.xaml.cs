@@ -51,9 +51,19 @@ namespace Log_Processor
             TextBox_PostProcessLog.Text = p.GetTimeResultString() + "\n\n\n" + p.GetLogResultString();
         }
 
-        private void Button_Print_Click(object sender, RoutedEventArgs e)
+        private void Button_Print_NoLog_Click(object sender, RoutedEventArgs e)
         {
-            
+
+        }
+
+        private void Button_Print_WithOddLog_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Print_WithAllLog_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
