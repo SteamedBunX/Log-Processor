@@ -99,15 +99,15 @@ namespace Log_Processing_Component
 
         public string GetLogString()
         {
-            string result = $"\tEmployee : {name}\n\t\tAll Paired Logs :\n";
+            string result = $"  Employee : {name}\n    All Paired Logs :\n";
             foreach(Log log in pairedLogs)
             {
-                result += $"\t\t\t{log}\n";
+                result += $"      {log}\n";
             }
-            result += "\t\tAll Odd Logs :\n";
+            result += "    All Odd Logs :\n";
             foreach(Log log in oddLogs)
             {
-                result += $"\t\t\t{log}\n";
+                result += $"      {log}\n";
             }
             result += "\n\n";
             return result;
@@ -115,7 +115,7 @@ namespace Log_Processing_Component
 
         public string GetTimeResultString()
         {
-            return $"\tEmployee {name} worked {totalWorkTime.TotalHours}\n";
+            return $"  Employee {name} worked {totalWorkTime.TotalHours : 00.00} Hours\n";
         }
 
         #endregion

@@ -48,11 +48,12 @@ namespace Log_Processor
                 p = new Processor(file);
                 await p.Process();
             }
+            TextBox_PostProcessLog.Text = p.GetTimeResultString() + "\n\n\n" + p.GetLogResultString();
         }
 
         private void Button_Print_Click(object sender, RoutedEventArgs e)
         {
-            TextBox_PostProcessLog.Text = p.GetTestLog();
+            
         }
     }
 }
