@@ -11,16 +11,14 @@ namespace Log_Processing_Component
     {
         Dictionary<string, Employee> employees = new Dictionary<string, Employee>();
         List<string> employeeNames = new List<string>();
-        string filePath;
-        string result;
-        char[] space = new char[] { ' ' };
+        string[] splitBy = new string[] { " ", "\t" };
 
-        public Processor(StreamReader file)
+        public Processor(ref StreamReader file)
         {
-            Process(file);
+            Process(ref file);
         }
 
-        public void Process(StreamReader file)
+        public void Process(ref StreamReader file)
         {
             while (file.Peek() > -1)
             {
@@ -37,7 +35,7 @@ namespace Log_Processing_Component
         {
             if (line.Length == 58)
             {
-                var content = line.Split(space, StringSplitOptions.RemoveEmptyEntries);
+                var content = line.Split(splitBy, StringSplitOptions.RemoveEmptyEntries);
                 var nameLength = content.Length - 7;
                 int logNumber = int.Parse(content[0]);
                 DateTime datetime = DateTime.Parse(content[content.Length - 2] + ' ' + content[content.Length - 1]);

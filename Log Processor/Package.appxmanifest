@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="2a59a8bc-c03a-4568-b9b6-38353ae73347"
+    Name="026df310-da9b-44f1-b657-c16ef5aa8ad9"
     Publisher="CN=yihao"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="2a59a8bc-c03a-4568-b9b6-38353ae73347" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="026df310-da9b-44f1-b657-c16ef5aa8ad9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Log Processor</DisplayName>

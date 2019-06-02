@@ -26,7 +26,7 @@ namespace Log_Processor
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        Processor p = new Processor();
+        Processor p;
         public MainPage()
         {
             this.InitializeComponent();
@@ -46,10 +46,10 @@ namespace Log_Processor
             if (file != null)
             {
                 var stream = await file.OpenAsync(FileAccessMode.Read);
-                using (StreamReader reader = new StreamReader(stream.AsStream())) ;
-                p = new Processor(file.Path);
+                StreamReader reader = new StreamReader(stream.AsStream());
+                p = new Processor(ref reader);
+                reader.Dispose();
             }
-
         }
     }
 }
