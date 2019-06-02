@@ -17,6 +17,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage;
 using Windows.UI.ViewManagement;
 
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Log_Processor
@@ -48,22 +49,29 @@ namespace Log_Processor
                 p = new Processor(file);
                 await p.Process();
             }
-            TextBox_PostProcessLog.Text = p.GetTimeResultString() + "\n\n\n" + p.GetLogResultString();
+            TextBox_PostProcessLog.Text = p.GetFullResultString();
         }
 
-        private void Button_Print_NoLog_Click(object sender, RoutedEventArgs e)
+        private async void Button_Print_NoLog_Click(object sender, RoutedEventArgs e)
         {
-
+            Windows.Storage.StorageFolder storageFolder =
+                Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sampleFile =
+                await storageFolder.CreateFileAsync("LogResult.txt",
+                    Windows.Storage.CreationCollisionOption.ReplaceExisting);
+            await Windows.Storage.FileIO.WriteTextAsync(sampleFile, p.GetTimeResultString());
+            await Windows.System.Launcher.LaunchFileAsync(sampleFile);
         }
 
-        private void Button_Print_WithOddLog_Click(object sender, RoutedEventArgs e)
+        private async void Button_Print_WithLog_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Print_WithAllLog_Click(object sender, RoutedEventArgs e)
-        {
-
+            Windows.Storage.StorageFolder storageFolder =
+    Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sampleFile =
+                await storageFolder.CreateFileAsync("LogResult.txt",
+                    Windows.Storage.CreationCollisionOption.ReplaceExisting);
+            await Windows.Storage.FileIO.WriteTextAsync(sampleFile, p.GetFullResultString());
+            await Windows.System.Launcher.LaunchFileAsync(sampleFile);
         }
     }
 }

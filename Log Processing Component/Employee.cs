@@ -99,7 +99,7 @@ namespace Log_Processing_Component
 
         public string GetLogString()
         {
-            string result = $"  Employee : {name}\n    All Paired Logs :\n";
+            string result = $"  Employee {name}'s Logs:\n    All Paired Logs :\n";
             foreach(Log log in pairedLogs)
             {
                 result += $"      {log}\n";

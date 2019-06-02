@@ -15,6 +15,7 @@ namespace Log_Processing_Component
         string[] splitBy = new string[] { " ", "\t" };
         string workHourResultString;
         string logResultString;
+        string fullResultString;
         StorageFile file;
 
         public Processor(StorageFile file)
@@ -33,11 +34,15 @@ namespace Log_Processing_Component
                     ProcessLog(ProcessLine(reader.ReadLine()));
                 }
                 List<Log> testLogs = new List<Log>();
+                workHourResultString = "";
+                logResultString = "";
+                fullResultString = "";
                 foreach (KeyValuePair<string, Employee> pair in employees)
                 {
                     pair.Value.Process();
                     workHourResultString += pair.Value.GetTimeResultString();
                     logResultString += pair.Value.GetLogString();
+                    fullResultString += pair.Value.GetTimeResultString() + pair.Value.GetLogString();
                 }
             }
         }
@@ -106,6 +111,11 @@ namespace Log_Processing_Component
         public string GetTimeResultString()
         {
             return workHourResultString;
+        }
+
+        public string GetFullResultString()
+        {
+            return fullResultString;
         }
 
         public string GetLogResultString()
